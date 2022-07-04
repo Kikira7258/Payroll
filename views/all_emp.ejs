@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="/styles/styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js" integrity="sha512-6PM0qYu5KExuNcKt5bURAoT6KCThUmHRewN3zUFNaoI6Di7XJPTMoT6K0nsagZKk2OB4L7E3q1uQKHNHd4stIQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+    <div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>Name</td>
+                    <td>Role</td>
+                    <td>Department</td>
+                    <td>Email</td>
+                    <td>Actions</td>
+                </tr>
+            </thead>
+            <tbody>
+                <% rows.forEach(data => { %>                 
+                <tr>
+                    <td><%= data.first_nm + ' ' + data.last_nm %></td>
+                    <td><%= data.role %></td>
+                    <td><%= data.department_nm %></td>
+                    <td><%= data.email || 'N/A' %></td>
+                    <td>
+                        <div>
+                           
+                        </div>
+                        <div class="dropdown">
+                            <label tabindex="0" class="btn m-1">Click</label>
+                            <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+                              <li><a href="/payroll/add-details/<%= data.employee_id %>" class="btn">Add Details</a></li>
+                              <li><a href="/employees/edit/<%= data.employee_id %>" class="btn">Edit</a></li>
+                            </ul>
+                          </div>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+    
+</body>
+</html>

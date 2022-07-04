@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    
+  <div class="flex">
+    <%- include('partials/side_nav') %>
+
+    <main class="w-full">
+          <%- include('partials/top_nav') %>
+
+          <div class="mx-auto mt-8 w-max">
+            <!-- daisyui library -->
+            <div class="stats shadow mb-8">
+  
+              <% if (locals.role === 'accountant') { %>
+                <div class="stat place-items-center">
+                  <div class="stat-title">Total Pay cycle</div>
+                  <a href="/payroll/paycycle/new" class="btn">Add New Paycycle</a>
+                  <select name="paycycle" id="paycycle" class="select">
+                    <% paycycles.forEach(cycle => { %>
+                      <option value="<%= cycle.id %>">
+                      <%= cycle.start_date.toLocaleDateString() + " - " + cycle.end_date.toLocaleDateString() %> 
+                      </option>
+                    <% }) %>
+                  </select>
+                </div>
+              <% } %>
+                
+                <div class="stat place-items-center">
+                  <div class="stat-title">Total hours worked</div>
+                  <div class="stat-value text-secondary"><%= totals.total_hours %></div>
+                  <!-- <div class="stat-desc text-secondary">↗︎ 40 (2%)</div> -->
+                </div>
+                
+                <div class="stat place-items-center">
+                  <div class="stat-title">Total overtime worked</div>
+                  <div class="stat-value"><%= totals.total_overtime %></div>
+                  <!-- <div class="stat-desc">↘︎ 90 (14%)</div> -->
+                </div>
+                
+              </div>
+              <!-- -------------------- -->
+    
+            <div class="mx-auto w-max">
+                <table>
+                    <thead class="bg-[#9CC4DB]">
+                        <tr class="py-4 mb-4">
+                            <th class="px-4">Employee</th>
+                            <th class="px-4">Hourly rate</th>
+                            <th class="px-4">Hours Worked</th>
+                            <th class="px-4">Overtime Rate</th>
+                            <th class="px-4">Overtime Hours</th>
+                            <th class="px-4">Gross Pay</th>
+                            <th class="px-4">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% if(details.length) { for(var i = 0; i < details.length; i++) { %> 
+                            
+                            <tr>
+                                <td class="px-4">
+                                  <div class="flex items-center space-x-3">
+                                    <div class="avatar">
+                                      <div class="mask mask-squircle w-12 h-12">
+                                        <img src="<%= details[i].profile_img %>" alt="Profile img" />
+                                      </div>
+                                    </div>
+                                    <div>
+                                      <div class="font-bold"><%= details[i].first_nm %> <%= details[i].last_nm %></div>
+                                      <div class="text-sm opacity-50">Dep: <%= details[i].department_nm %></div>
+                                      <div class="text-sm opacity-50">Role: <%= details[i].role %></div>
+                                    </div>
+                                  </div>
+                                </td>
+
+                                <td class="px-4">
+                                  <span class="badge badge-ghost badge-sm"><%= details[i].hourly_rate %></span>
+                                </td>
+
+                                <td class="px-4">
+                                  <span class="badge badge-ghost badge-sm"><%= details[i].hours_worked %></span>
+                                </td>
+
+                                <td class="px-4">
+                                  <span class="badge badge-ghost badge-sm"><%= details[i].overtime_rate %></span>
+                                </td>
+
+                                <td class="px-4">
+                                  <span class="badge badge-ghost badge-sm"><%= details[i].overtime_hours %></span>
+                                </td>
+
+                                <td class="px-4">
+                                  <span class="badge badge-ghost badge-sm"><%= details[i].gross_pay %></span>
+                                </td>
+
+                                <td class="px-4">
+                                    <div class="dropdown">
+                                        <label tabindex="0" class="btn btn-xs">...</label>
+                                        <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box">
+                                            <li><a href="/payroll/edit/<%=details[i].payroll_id%>">Edit</a></li>
+                                            <li><a href="/payroll/delete/<%=details[i].payroll_id%>">Delete</a></li>
+                                            <li><a href="/payslip/<%=details[i].employee_id%>/<%=details[i].paycycle_id%>">Payslip</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            <% }} else { %>
+                            <tr>
+                                <td>No Records</td>
+                            </tr>
+                            <% } %>
+                        
+                    </tbody>
+                </table>
+    
+              </div>
+            </div>
+        </main>
+    </div>
+
+
+    
+    
+</body>
+</html>

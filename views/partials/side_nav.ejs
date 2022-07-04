@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="/styles/styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js" integrity="sha512-6PM0qYu5KExuNcKt5bURAoT6KCThUmHRewN3zUFNaoI6Di7XJPTMoT6K0nsagZKk2OB4L7E3q1uQKHNHd4stIQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+    
+    <div>
+        <aside class="bg-[#2B3952] text-[#fff] w-[250px] h-screen px-4 py-4 overflow-hidden">
+            <div class="flex gap-4 items-center border-b-2 border-[#fff] pb-4">
+                <span class="h-[35px] w-[35px] rounded-full bg-[#fff] p-[4px]">
+                    <img class="w-[20px] mx-auto" src="http://www.clker.com/cliparts/R/w/J/X/n/L/sc-logo-black-gray.svg.hi.png">
+                </span>
+                <h1 class="whitespace-nowrap">Serhant Construction</h1>
+            </div>
+            <ul class="border-b-2 border-[#fff] pb-4">
+                <% if (locals.role !== 'employee') { %>
+                    <li class="my-4"><a href="/payroll"><span class="mr-4"><i class="fa-solid fa-chart-column"></i></span>Payroll</a></li>
+                    <li class="mb-4"><a href="/employees"><span class="mr-4"><i class="fa-solid fa-user-plus"></i></span>Employees</a></li>
+                    <li class="mb-4"><a href="/employees/add"><span class="mr-4"><i class="fa-solid fa-user-plus"></i></span>Add employee</a></li>
+                    <% } else { %>
+                        <li class="mb-4"><a href="/payslip/<%= locals.user_id %>/active"><span class="mr-4"><i class="fa-solid fa-file-lines"></i></span>Pay Slip</a></li>
+                        <% } %>
+            </ul>
+        </aside>
+
+ 
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="/styles/styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js" integrity="sha512-6PM0qYu5KExuNcKt5bURAoT6KCThUmHRewN3zUFNaoI6Di7XJPTMoT6K0nsagZKk2OB4L7E3q1uQKHNHd4stIQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+    
+    <div class="flex">
+        <%- include('partials/side_nav') %>
+        <div class="w-full">
+            <%- include('partials/top_nav') %>
+            <div class="">
+                <form action="/employees/<%= locals.action === 'add' ? 'add' : ('update/' + locals.data.id) %>" method="post" class="w-max mx-auto mt-20 shadow-sm shadow-[#2B3952] p-4 rounded-sm">
+                    <h1 class="text-center mb-8"><%= locals.action === 'add' ? 'Add' : 'Edit' %> Employee</h1>
+                    <div class="flex gap-8">
+                        <div>
+                            <label>First Name</label><br>
+                            <input type="text" name="first_nm" class="py-2 px-4 mb-4 border-[2px] border-[#9CC4DB] rounded-md" value="<%= locals.data.first_nm %>">
+                        </div>
+                        <div>
+                            <label>Last Name</label><br>
+                            <input type="text" name="last_nm" class="py-2 px-4 mb-4 border-[2px] border-[#9CC4DB] rounded-md" value="<%= locals.data.last_nm %>">
+                        </div>
+                    </div>
+                   
+                    <div class="flex gap-8">
+                        <div>
+                            <label>Department</label><br>
+                            <select name="department" id="department">
+                                <% departments.forEach(department => { %>
+                                <option value="<%= department.id %>" <%- locals.data.department_id === department.id ? 'selected': '' -%> ><%= department.department_nm %>
+                                </option>
+                                <% }) %>
+                            </select>
+                        </div>
+                        <div>
+                            <label>Role</label><br>
+                            <select name="role" id="role">
+                                <option value="supervisor" <%- locals.data.role === 'supervisor' ? 'selected': '' -%>>Supervisor</option>
+                                <option value="employee" <%- locals.data.role === 'employee' ? 'selected': '' -%>>Employee</option>
+                                <option value="accountant" <%- locals.data.role === 'accountant' ? 'selected': '' -%>>Accountant</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="border-[2px] bg-[#9CC4DB] rounded-md text-[#fff] py-2 px-4 w-full"><%= locals.action === 'add' ? 'Add' : 'Save' %></button>
+        
+                </form>
+            </div>
+        </div>
+
+    </div>
+    
+</body>
+</html>

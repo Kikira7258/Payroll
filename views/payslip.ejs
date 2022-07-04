@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="/styles/styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js" integrity="sha512-6PM0qYu5KExuNcKt5bURAoT6KCThUmHRewN3zUFNaoI6Di7XJPTMoT6K0nsagZKk2OB4L7E3q1uQKHNHd4stIQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+    <main class="flex">
+        <%- include('partials/side_nav') %>
+        <div class="w-full">
+            <%- include('partials/top_nav') %>
+
+            <div class="mx-8 mt-4">
+                <h1 class="text-center text-[35px]">Payslip</h1>
+                <div class="flex gap-4 items-center border-b-2 border-[#fff] mb-4">
+                    <span class="h-[35px] w-[35px] rounded-full bg-[#fff] p-[4px]">
+                        <img class="w-[20px] mx-auto" src="http://www.clker.com/cliparts/R/w/J/X/n/L/sc-logo-black-gray.svg.hi.png">
+                    </span>
+                    <h1 class="whitespace-nowrap">Serhant Construction</h1>
+                </div>
+                
+                <div class="mb-4">
+                    <h3><%= data.first_nm + ' ' + data.last_nm %></h3>
+                    <p><%= data.department_nm %></p>
+                    <p><%= data.start_date.toLocaleDateString() + ' - ' + data.end_date.toLocaleDateString() %></p>
+                </div>
+
+                <div class="w-max mx-auto">
+                    <table>
+                        <thead>
+                            <tr class="py-2">
+                                <td class="px-2">Description</td>
+                                <td class="px-2">Hours worked</td>
+                                <td class="px-2">hourly rate</td>
+                                <td class="px-2">Overtime Hours</td>
+                                <td class="px-2">Overtime Rate</td>
+                                <td class="px-2 text-[25px]">Total</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="px-2">Salary</td>
+                                <td class="px-2"><%= data.hours_worked %></td>
+                                <td class="px-2"><%= data.hourly_rate %> </td>
+                                <td class="px-2"><%= data.overtime_hours %></td>
+                                <td class="px-2"><%= data.overtime_rate %> </td>
+                                <td class="px-2"><%= data.gross_pay %></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </main>
+    
+</body>
+</html>
